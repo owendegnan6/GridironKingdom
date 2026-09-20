@@ -4,7 +4,9 @@
 
 ## Platform
 
-Cross-platform via Flutter (iOS, Android, web, macOS, Windows, Linux) — **one shared visual identity across every platform, by explicit user decision, not per-OS adaptive.** Do not load `ios.md` / `android.md` native-HIG-conformance guidance for this project: the user declined per-OS component/navigation conformance in favor of a single committed look everywhere. Native *mechanical* guarantees that aren't about visual conformance (safe-area insets, minimum touch target size, honoring Reduce Motion/system back gesture) still apply as baseline usability, not as a native-look mandate.
+adaptive
+
+Cross-platform Flutter, ships both iOS and Android as the primary targets; web/macOS/Windows/Linux are secondary builds of the same code. **One shared visual identity across every platform, by explicit user decision, not per-OS adaptive design.** Do not load `ios.md` / `android.md` native-HIG-conformance guidance for this project: the user declined per-OS component/navigation conformance in favor of a single committed look everywhere. Native *mechanical* guarantees that aren't about visual conformance (safe-area insets, minimum touch target size, honoring Reduce Motion/system back gesture) still apply as baseline usability, not as a native-look mandate.
 
 Primary distribution is mobile app stores (iOS/Android) — `google_mobile_ads` and `in_app_purchase` are integrated and must keep working. Desktop/web builds exist but are secondary.
 

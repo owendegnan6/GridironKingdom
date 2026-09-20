@@ -39,6 +39,15 @@ Team colors (real NCAA school colors, `CollegeTeam.primary`/`.secondary`) are us
 - `GKRadius` collapsed from 17 ad-hoc values (1–30px) to 6 deliberate steps; a leather-and-paper world reads architectural, not soft-rounded-everything.
 - Zero-offset "glow halo" `BoxShadow`s (color + blur, no offset — a named craft-floor default to refuse) were given real directional offsets across ~10 call sites app-wide.
 
+## Amplification pass (2026-09-12)
+
+The user reported the shipped leather-ledger world still read as impersonal/AI despite the redesign; asked to "push the current world further" rather than replace it (offered a fresh direction roll — Stadium Signage & Tailgate Culture — and explicitly declined it in favor of amplifying the incumbent). This is a `bolder`-class amplification, not a new world: same palette, same components, same content, turned up in two places so far.
+
+- **`gkTeamTintedLeather(Color teamColor, {double amount = .72})`** (near `gkDarkenedSchoolColor`/`gkSchoolColorOnPaper`): blends the coach's own team color into `saddleLeather` rather than pure black, so a surface reads as leather colored by *this* program's identity instead of a neutral brown shared by every dynasty. Applied to `_kingdomMasthead()` (the top bar visible on every Dashboard screen, previously flat `GKColors.saddleLeather` regardless of team) — its bottom border now uses `gkDarkenedSchoolColor(selectedTeam.primary, .3)` for a crisper team-colored edge. `_hqIdentityBand()` and `_coachCommandHeader()` already did this via `gkDarkenedSchoolColor` directly; the masthead was the one high-visibility gap.
+- **`_ScoreFlipDigits`** (top-level widget, just above `GameSimScreen`): the live scoreboard's score number now does a brass split-flap flip on every change — old digits rotate away top-first on a 3D X-axis, new digits rotate in the same way, 420ms `easeOutCubic`/`easeInCubic` — instead of the number just snapping to the new value. This is the one authored focal motion on the screen (animate.md: "one authored moment, not scattered effects"); it's also the single most recognizable physical artifact of a real stadium/broadcast scoreboard, which is the specific "what would a football fan want" thread the user pulled on. Wired into `_scoreboardTeam`'s `scoreText`; nothing else on the GAMECAST tab was touched.
+
+Not yet covered in this pass — a natural next round, not started: Recruiting board, Trophy Room, Championship Celebration, Legacy Board, and the postgame/box-score screens have not had a team-color or motion amplification pass yet. `_hqProgramReadout`'s pulse bars and `_hqPriorityLedger`'s numbered cards are still the flat brass-on-leather from the original redesign.
+
 ## Known gaps (not yet migrated)
 
 This was a large single-file app (~20k lines) redesigned in one pass; coverage is broad but not total:
